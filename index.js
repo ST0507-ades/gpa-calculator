@@ -19,6 +19,11 @@ function setShareLinkInInputField(inputField, key) {
     inputField.value = url.toString();
 }
 
+function deleteComplete() {
+    // empty function
+    // Call this function after you're sure that deletion is completed
+}
+
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 const charactersLength = characters.length;
 function makeId(length) {
