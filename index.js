@@ -13,6 +13,12 @@ const letterGrades = {
 };
 const modules = {};
 
+function setShareLinkInInputField(inputField, key) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('key', key);
+    inputField.value = url.toString();
+}
+
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 const charactersLength = characters.length;
 function makeId(length) {
@@ -162,10 +168,7 @@ window.addEventListener('DOMContentLoaded', function () {
         })
             .then((response) => response.json())
             .then((json) => {
-                const key = json.key;
-                const url = new URL(window.location.href);
-                url.searchParams.set('key', key);
-                shareLinkInput.value = url.toString();
+                setShareLinkInInputField(shareLinkInput, json.key);
                 timeGeneratedField.textContent = new Date().toLocaleString();
             })
             .catch((error) => alert(error.message))
