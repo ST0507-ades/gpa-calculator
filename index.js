@@ -13,6 +13,16 @@ const letterGrades = {
 };
 const modules = {};
 
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const charactersLength = characters.length;
+function makeId(length) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 window.addEventListener('DOMContentLoaded', function () {
     // Table
     const moduleTableBody = document.querySelector('#module-table tbody');
@@ -72,7 +82,7 @@ window.addEventListener('DOMContentLoaded', function () {
      * Create a new row and update modules object
      */
     function createModuleWithId(moduleName, credit, grade) {
-        const id = Date.now();
+        const id = makeId(10);
         modules[id] = { name: moduleName, credit, grade };
         const newRow = createRow(moduleName, credit, grade, (newRow) => {
             moduleTableBody.removeChild(newRow);
