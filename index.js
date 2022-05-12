@@ -161,7 +161,8 @@ window.addEventListener('DOMContentLoaded', function () {
     /**
      * Uploads modules data to storage and generate sharing link based on returned key
      */
-    generateLinkButton.onclick = function () {
+    generateLinkButton.onclick = function (e) {
+        e.preventDefault();
         disablePage();
         const modules = getModules();
         fetch(`${STORAGE_API_HOST}/storage`, {
