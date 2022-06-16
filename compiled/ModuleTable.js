@@ -73,6 +73,7 @@ function ModuleTable(props) {
 }
 
 var addRow = void 0; // In global to be used by other scripts
+var getRows = void 0;
 
 window.addEventListener('DOMContentLoaded', function () {
     var rows = [];
@@ -87,6 +88,9 @@ window.addEventListener('DOMContentLoaded', function () {
     addRow = function addRow(name, credit, grade) {
         rows.push({ name: name, credit: credit, grade: grade });
         renderModuleTable(); // Do it each time a new row is added
+    };
+    getRows = function getRows() {
+        return [].concat(rows); // We want to create a new copy of the row
     };
 
     renderModuleTable(); // Do it once on DOMContentLoaded

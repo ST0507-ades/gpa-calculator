@@ -1,5 +1,5 @@
 const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-const STORAGE_API_HOST = isLocalhost ? `http://localhost:3000` : `https://keyval-store.herokuapp.com`;
+const STORAGE_API_HOST = false ? `http://localhost:3000` : `https://keyval-store.herokuapp.com`;
 const letterGrades = {
     4: 'A',
     3.5: 'B+',
@@ -102,13 +102,7 @@ window.addEventListener('DOMContentLoaded', function () {
      * Create an array of module based on the table
      */
     function getModules() {
-        const rows = moduleTableBody.querySelectorAll('tr');
-        const result = [];
-        rows.forEach((row) => {
-            const id = row.id;
-            result.push(modules[id]);
-        });
-        return result;
+        return getRows();
     }
 
     /**
