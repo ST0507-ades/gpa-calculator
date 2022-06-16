@@ -178,8 +178,7 @@ window.addEventListener('DOMContentLoaded', function () {
             .then((json) => {
                 json.forEach((module) => {
                     const { name: moduleName, credit, grade } = module;
-                    const newRow = createModuleWithId(moduleName, credit, grade);
-                    moduleTableBody.appendChild(newRow);
+                    createModuleWithId(moduleName, credit, grade);
                 });
                 updateResult();
             })
