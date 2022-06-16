@@ -95,13 +95,7 @@ window.addEventListener('DOMContentLoaded', function () {
     function createModuleWithId(moduleName, credit, grade) {
         const id = makeId(10);
         modules[id] = { name: moduleName, credit, grade };
-        const newRow = createRow(moduleName, credit, grade, (newRow) => {
-            moduleTableBody.removeChild(newRow);
-            delete modules[id];
-            updateResult();
-        });
-        newRow.id = id;
-        return newRow;
+        addRow(moduleName, credit, grade);
     }
 
     /**
@@ -152,8 +146,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const credit = +creditInput.value;
         const grade = +gradeInput.value;
 
-        const newRow = createModuleWithId(moduleName, credit, grade);
-        moduleTableBody.appendChild(newRow);
+        createModuleWithId(moduleName, credit, grade);
         updateResult();
         return false;
     };
