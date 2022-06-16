@@ -36,11 +36,18 @@ let addRow; // In global to be used by other scripts
 
 window.addEventListener('DOMContentLoaded', function () {
     const rows = [];
-    addRow = function (name, credit, grade) {
-        rows.push({ name, credit, grade });
-    };
 
     const domContainer = document.querySelector('#table-root');
     const root = ReactDOM.createRoot(domContainer);
-    root.render(<ModuleTable rows={rows} />);
+
+    function renderModuleTable() {
+        root.render(<ModuleTable rows={rows} />);
+    }
+
+    addRow = function (name, credit, grade) {
+        rows.push({ name, credit, grade });
+        renderModuleTable(); // Do it each time a new row is added
+    };
+
+    renderModuleTable(); // Do it once on DOMContentLoaded
 });
