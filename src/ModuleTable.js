@@ -14,8 +14,15 @@ function ModuleTable(props) {
     );
 }
 
+let addRow; // In global to be used by other scripts
+
 window.addEventListener('DOMContentLoaded', function () {
+    const rows = [];
+    addRow = function (name, credit, grade) {
+        rows.push({ name, credit, grade });
+    };
+
     const domContainer = document.querySelector('#table-root');
     const root = ReactDOM.createRoot(domContainer);
-    root.render(<ModuleTable />);
+    root.render(<ModuleTable rows={rows} />);
 });
