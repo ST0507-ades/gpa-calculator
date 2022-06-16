@@ -1,5 +1,4 @@
 function ModuleRow(props) {
-    // TODO: Implement Delete
     return React.createElement(
         'tr',
         null,
@@ -23,7 +22,7 @@ function ModuleRow(props) {
             null,
             React.createElement(
                 'button',
-                null,
+                { onClick: props.onDelete },
                 'delete'
             )
         )
@@ -65,8 +64,15 @@ function ModuleTable(props) {
         React.createElement(
             'tbody',
             null,
-            props.rows.map(function (row) {
-                return React.createElement(ModuleRow, { name: row.name, credit: row.credit, grade: row.grade });
+            props.rows.map(function (row, index) {
+                return React.createElement(ModuleRow, {
+                    name: row.name,
+                    credit: row.credit,
+                    grade: row.grade,
+                    onDelete: function onDelete() {
+                        return props.onDeleteRow(index);
+                    }
+                });
             })
         )
     );
@@ -81,8 +87,14 @@ window.addEventListener('DOMContentLoaded', function () {
     var domContainer = document.querySelector('#table-root');
     var root = ReactDOM.createRoot(domContainer);
 
+    function deleteRow(index) {
+        if (index > rows.length) return;
+        rows[index].isDeleted = true;
+        renderModuleTable();
+    }
+
     function renderModuleTable() {
-        root.render(React.createElement(ModuleTable, { rows: rows }));
+        root.render(React.createElement(ModuleTable, { rows: rows, onDeleteRow: deleteRow }));
     }
 
     addRow = function addRow(name, credit, grade) {

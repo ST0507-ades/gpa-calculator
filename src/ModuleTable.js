@@ -1,12 +1,11 @@
 function ModuleRow(props) {
-    // TODO: Implement Delete
     return (
         <tr>
             <td>{props.name}</td>
             <td>{props.credit}</td>
             <td>{props.grade}</td>
             <td>
-                <button>delete</button>
+                <button onClick={props.onDelete}>delete</button>
             </td>
         </tr>
     );
@@ -24,8 +23,13 @@ function ModuleTable(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.rows.map((row) => (
-                    <ModuleRow name={row.name} credit={row.credit} grade={row.grade} />
+                {props.rows.map((row, index) => (
+                    <ModuleRow
+                        name={row.name}
+                        credit={row.credit}
+                        grade={row.grade}
+                        onDelete={() => props.onDeleteRow(index)}
+                    />
                 ))}
             </tbody>
         </table>
@@ -41,8 +45,14 @@ window.addEventListener('DOMContentLoaded', function () {
     const domContainer = document.querySelector('#table-root');
     const root = ReactDOM.createRoot(domContainer);
 
+    function deleteRow(index) {
+        if (index > rows.length) return;
+        rows[index].isDeleted = true;
+        renderModuleTable();
+    }
+
     function renderModuleTable() {
-        root.render(<ModuleTable rows={rows} />);
+        root.render(<ModuleTable rows={rows} onDeleteRow={deleteRow} />);
     }
 
     addRow = function (name, credit, grade) {
