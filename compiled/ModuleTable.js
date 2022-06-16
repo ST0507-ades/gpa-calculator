@@ -1,3 +1,35 @@
+function ModuleRow(props) {
+    // TODO: Implement Delete
+    return React.createElement(
+        'tr',
+        null,
+        React.createElement(
+            'td',
+            null,
+            props.name
+        ),
+        React.createElement(
+            'td',
+            null,
+            props.credit
+        ),
+        React.createElement(
+            'td',
+            null,
+            props.grade
+        ),
+        React.createElement(
+            'td',
+            null,
+            React.createElement(
+                'button',
+                null,
+                'delete'
+            )
+        )
+    );
+}
+
 function ModuleTable(props) {
     return React.createElement(
         'table',
@@ -30,7 +62,13 @@ function ModuleTable(props) {
                 )
             )
         ),
-        React.createElement('tbody', null)
+        React.createElement(
+            'tbody',
+            null,
+            props.rows.map(function (row) {
+                return React.createElement(ModuleRow, { name: row.name, credit: row.credit, grade: row.grade });
+            })
+        )
     );
 }
 

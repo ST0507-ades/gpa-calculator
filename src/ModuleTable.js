@@ -1,3 +1,17 @@
+function ModuleRow(props) {
+    // TODO: Implement Delete
+    return (
+        <tr>
+            <td>{props.name}</td>
+            <td>{props.credit}</td>
+            <td>{props.grade}</td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+    );
+}
+
 function ModuleTable(props) {
     return (
         <table id="module-table">
@@ -9,7 +23,11 @@ function ModuleTable(props) {
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                {props.rows.map((row) => (
+                    <ModuleRow name={row.name} credit={row.credit} grade={row.grade} />
+                ))}
+            </tbody>
         </table>
     );
 }
