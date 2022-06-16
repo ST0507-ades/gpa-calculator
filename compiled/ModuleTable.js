@@ -65,7 +65,7 @@ function ModuleTable(props) {
             'tbody',
             null,
             props.rows.map(function (row, index) {
-                return React.createElement(ModuleRow, {
+                return !row.isDeleted && React.createElement(ModuleRow, {
                     name: row.name,
                     credit: row.credit,
                     grade: row.grade,
@@ -102,7 +102,9 @@ window.addEventListener('DOMContentLoaded', function () {
         renderModuleTable(); // Do it each time a new row is added
     };
     getRows = function getRows() {
-        return [].concat(rows); // We want to create a new copy of the row
+        return rows.filter(function (row) {
+            return !row.isDeleted;
+        });
     };
 
     renderModuleTable(); // Do it once on DOMContentLoaded

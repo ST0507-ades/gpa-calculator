@@ -23,14 +23,17 @@ function ModuleTable(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.rows.map((row, index) => (
-                    <ModuleRow
-                        name={row.name}
-                        credit={row.credit}
-                        grade={row.grade}
-                        onDelete={() => props.onDeleteRow(index)}
-                    />
-                ))}
+                {props.rows.map(
+                    (row, index) =>
+                        !row.isDeleted && (
+                            <ModuleRow
+                                name={row.name}
+                                credit={row.credit}
+                                grade={row.grade}
+                                onDelete={() => props.onDeleteRow(index)}
+                            />
+                        ),
+                )}
             </tbody>
         </table>
     );
@@ -60,7 +63,7 @@ window.addEventListener('DOMContentLoaded', function () {
         renderModuleTable(); // Do it each time a new row is added
     };
     getRows = function () {
-        return [...rows]; // We want to create a new copy of the row
+        return rows.filter((row) => !row.isDeleted);
     };
 
     renderModuleTable(); // Do it once on DOMContentLoaded
