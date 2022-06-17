@@ -43,9 +43,9 @@ export default function KeyValTable(props) {
             props.rows.map(function (_ref) {
                 var id = _ref.id,
                     key = _ref.key,
-                    value = _ref.value,
+                    data = _ref.data,
                     expire_on = _ref.expire_on;
-                return React.createElement(KeyValRow, { id: id, k: key, value: value, expire_on: expire_on });
+                return React.createElement(KeyValRow, { id: id, k: key, value: data, expire_on: expire_on });
             })
         )
     );

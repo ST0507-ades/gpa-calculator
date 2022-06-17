@@ -4,7 +4,7 @@ export default function KeyValRow(props) {
             <td>{props.id}</td>
             <td>{props.k}</td>
             <td>{props.value}</td>
-            <td>{props.expire_on}</td>
+            <td>{new Date(props.expire_on * 1000).toLocaleString()}</td>
             <td>
                 <button>:)</button>
             </td>

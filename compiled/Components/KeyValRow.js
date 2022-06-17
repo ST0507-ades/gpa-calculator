@@ -20,7 +20,7 @@ export default function KeyValRow(props) {
         React.createElement(
             "td",
             null,
-            props.expire_on
+            new Date(props.expire_on * 1000).toLocaleString()
         ),
         React.createElement(
             "td",
