@@ -6,7 +6,7 @@ export default function KeyValControls(props) {
         isExpired = _React$useState2[0],
         setIsExpired = _React$useState2[1];
 
-    var _React$useState3 = React.useState(0),
+    var _React$useState3 = React.useState(2300),
         _React$useState4 = _slicedToArray(_React$useState3, 2),
         lastId = _React$useState4[0],
         setLastId = _React$useState4[1];

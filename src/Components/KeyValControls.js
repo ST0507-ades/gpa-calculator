@@ -4,19 +4,13 @@ export default function KeyValControls(props) {
 
     const { data } = props;
 
-    React.useEffect(() => {
-        props.onChange({
-            isExpired,
-            lastId,
-        });
-    }, [isExpired, lastId]);
-
     return (
         <div>
             <div>
                 <button
                     onClick={() => {
                         setLastId(data[data.length - 1].id);
+                        props.onChange({ isExpired, lastId });
                     }}
                 >
                     Next Page
@@ -29,6 +23,7 @@ export default function KeyValControls(props) {
                     checked={isExpired}
                     onChange={(e) => {
                         setIsExpired(e.target.checked);
+                        props.onChange({ isExpired, lastId });
                     }}
                 ></input>
             </div>
