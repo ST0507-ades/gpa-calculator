@@ -14,7 +14,7 @@ export default function KeyValTable(props) {
             </thead>
             <tbody>
                 {props.rows.map(({ id, key, data, expire_on }) => (
-                    <KeyValRow id={id} k={key} value={data} expire_on={expire_on} />
+                    <KeyValRow onExpire={props.onExpireRow} id={id} k={key} value={data} expire_on={expire_on} />
                 ))}
             </tbody>
         </table>

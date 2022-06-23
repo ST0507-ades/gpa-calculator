@@ -4,15 +4,20 @@ import KeyValTable from './KeyValTable.js';
 
 const { useQuery, QueryClient, QueryClientProvider } = window.ReactQuery;
 
+const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+});
+
 function ManageKeyVal(props) {
     const [filter, setFilter] = React.useState({});
-    const { data, error, isLoading, isRefetching } = useQuery(
+    const { data, error, isLoading, isRefetching, refetch } = useQuery(
         ['getAll', filter.lastId, filter.isExpired],
         () => getAll(filter.lastId, 20, filter.isExpired),
-        {
-            refetchOnWindowFocus: false,
-        },
     );
+
+    const onExpireRow = React.useCallback(() => {
+        refetch();
+    }, [refetch]);
 
     return (
         <div>
@@ -23,13 +28,12 @@ function ManageKeyVal(props) {
             ) : error ? (
                 <p>{error.message}</p>
             ) : (
-                <KeyValTable rows={data}></KeyValTable>
+                <KeyValTable rows={data} onExpireRow={onExpireRow}></KeyValTable>
             )}
         </div>
     );
 }
 
-const queryClient = new QueryClient();
 function ManageKeyValApp(props) {
     return (
         <QueryClientProvider client={queryClient}>

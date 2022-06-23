@@ -10,6 +10,10 @@ var _window$ReactQuery = window.ReactQuery,
     QueryClientProvider = _window$ReactQuery.QueryClientProvider;
 
 
+var queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } }
+});
+
 function ManageKeyVal(props) {
     var _React$useState = React.useState({}),
         _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -18,13 +22,16 @@ function ManageKeyVal(props) {
 
     var _useQuery = useQuery(['getAll', filter.lastId, filter.isExpired], function () {
         return getAll(filter.lastId, 20, filter.isExpired);
-    }, {
-        refetchOnWindowFocus: false
     }),
         data = _useQuery.data,
         error = _useQuery.error,
         isLoading = _useQuery.isLoading,
-        isRefetching = _useQuery.isRefetching;
+        isRefetching = _useQuery.isRefetching,
+        refetch = _useQuery.refetch;
+
+    var onExpireRow = React.useCallback(function () {
+        refetch();
+    }, [refetch]);
 
     return React.createElement(
         'div',
@@ -43,11 +50,10 @@ function ManageKeyVal(props) {
             'p',
             null,
             error.message
-        ) : React.createElement(KeyValTable, { rows: data })
+        ) : React.createElement(KeyValTable, { rows: data, onExpireRow: onExpireRow })
     );
 }
 
-var queryClient = new QueryClient();
 function ManageKeyValApp(props) {
     return React.createElement(
         QueryClientProvider,
